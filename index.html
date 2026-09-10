@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Green Revolution - Membership Portal</title>
+    <!-- Tailwind CSS for modern, clean UI components -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- FontAwesome for Dashboard Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        .active-nav { @apply bg-green-700 text-white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased selection:bg-green-500 selection:text-white">
+
+    <!-- ================= AUTH PAGE (LOGIN) ================= -->
+    <div id="auth-page" class="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900 via-gray-800 to-green-950">
+        <div class="max-w-md w-full space-y-8 bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-700">
+            <div class="text-center">
+                <div class="mx-auto h-16 w-16 bg-green-600 rounded-full flex items-center justify-center shadow-lg shadow-green-900/50">
+                    <i class="fa-solid fa-leaf text-white text-3xl"></i>
+                </div>
+                <h2 class="mt-4 text-3xl font-extrabold text-white tracking-tight">New Green Revolution</h2>
+                <p class="mt-2 text-sm text-gray-400">Secure Member Portal</p>
+            </div>
+            <form class="mt-8 space-y-6" onsubmit="handleLogin(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label for="email" class="text-sm font-medium text-gray-300 block mb-2">Email Address</label>
+                        <input id="email" type="email" required class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition" placeholder="member@greenrevolution.org">
+                    </div>
+                    <div>
+                        <label for="password" class="text-sm font-medium text-gray-300 block mb-2">Password</label>
+                        <input id="password" type="password" required class="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition" placeholder="••••••••">
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-3 px-4 bg-green-600 hover:bg-green-500 active:scale-[0.98] text-white font-bold rounded-xl shadow-lg transition duration-150 ease-in-out">
+                    Sign In to Dashboard
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= MAIN DASHBOARD PORTAL ================= -->
+    <div id="dashboard-portal" class="hidden min-h-screen flex flex-col bg-gray-950">
+        <!-- Top App Bar for Mobile -->
+        <header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="h-9 w-9 bg-green-600 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-leaf text-white text-lg"></i>
+                </div>
+                <span class="font-bold text-lg tracking-wide text-white">NGR Portal</span>
+            </div>
+            <button onclick="switchTab('notifications')" class="relative p-2 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-bell text-xl"></i>
+                <span class="absolute top-1 right-1 h-2 w-2 bg-green-500 rounded-full"></span>
+            </button>
+        </header>
+
+        <!-- Main Workspace Wrap -->
+        <div class="flex flex-1 flex-col md:flex-row">
+            <!-- Sidebar Navigation (Hidden on Mobile, Visible on Desktop) -->
+            <nav class="hidden md:flex flex-col w-64 bg-gray-900 border-r border-gray-800 p-4 space-y-1">
+                <button onclick="switchTab('home')" class="nav-btn active-nav flex items-center space-x-3 px-4 py-3 rounded-xl transition font-medium"><i class="fa-solid fa-house w-5"></i> <span>Home Dashboard</span></button>
+                <button onclick="switchTab('plan')" class="nav-btn flex items-center space-x-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition font-medium"><i class="fa-solid fa-id-card w-5"></i> <span>My Plan</span></button>
+                <button onclick="switchTab('payments')" class="nav-btn flex items-center space-x-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition font-medium"><i class="fa-solid fa-credit-card w-5"></i> <span>Payments</span></button>
+                <button onclick="switchTab('profile')" class="nav-btn flex items-center space-x-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition font-medium"><i class="fa-solid fa-user w-5"></i> <span>My Profile</span></button>
+                <button onclick="switchTab('notifications')" class="nav-btn flex items-center space-x-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition font-medium"><i class="fa-solid fa-bell w-5"></i> <span>Notifications</span></button>
+                <button onclick="switchTab('documents')" class="nav-btn flex items-center space-x-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition font-medium"><i class="fa-solid fa-file-invoice w-5"></i> <span>Documents Vault</span></button>
+                <button onclick="switchTab('about')" class="nav-btn flex items-center space-x-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition font-medium"><i class="fa-solid fa-circle-info w-5"></i> <span>About Us</span></button>
+                <button onclick="switchTab('contact')" class="nav-btn flex items-center space-x-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition font-medium"><i class="fa-solid fa-envelope w-5"></i> <span>Contact Support</span></button>
+                <button onclick="switchTab('settings')" class="nav-btn flex items-center space-x-3 px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white rounded-xl transition font-medium"><i class="fa-solid fa-gear w-5"></i> <span>Settings</span></button>
+                <div class="pt-4 border-t border-gray-800 mt-auto">
+                    <button onclick="handleLogout()" class="w-full flex items-center space-x-3 px-4 py-3 text-red-400 hover:bg-red-950/30 rounded-xl transition font-medium"><i class="fa-solid fa-right-from-bracket w-5"></i> <span>Secure Logout</span></button>
+                </div>
+            </nav>
+
+            <!-- Scrollable Content Viewport -->
+            <main class="flex-1 p-4 sm:p-6 max-w-4xl mx-auto w-full pb-24 md:pb-6">
+                
+                <!-- 1. HOME / DASHBOARD TAB -->
+                <section id="tab-home" class="tab-content active space-y-6">
+                    <div class="bg-gradient-to-r from-green-800 to-emerald-900 p-6 rounded-2xl shadow-lg border border-green-700/30">
+                        <p class="text-sm font-semibold tracking-wider text-green-200 uppercase">Welcome Back</p>
+                        <h1 id="welcome-name" class="text-2xl font-bold text-white mt-1">Hello, Member</h1>
+                        <div class="mt-4 flex items-center space-x-2 bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-lg w-fit">
+                            <span class="h-2 w-2 bg-emerald-400 rounded-full animate-pulse"></span>
+                            <span id="dash-status" class="text-xs font-medium text-emerald-200">Active Premium Tier</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+                            <p class="text-xs text-gray-400">Total Premium Paid</p>
+                            <p id="dash-paid" class="text-xl font-bold text-white mt-1">$0.00</p>
+                        </div>
+                        <div class="bg-gray-900 border border-gray-800 p-4 rounded-xl">
+                            <p class="text-xs text-gray-400">Current Balance Due</p>
+                            <p id="dash-balance" class="text-xl font-bold text-green-400 mt-1">$0.00</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-900 border border-gray-800 rounded-xl p-4 space-y-3">
+                        <h3 class="text-sm font-bold text-gray-300 uppercase tracking-wider mb-1">Policy Lifespan</h3>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">Start Date</span>
+                            <span id="dash-start" class="text-white font-medium">-</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">Expiry Date</span>
+                            <span id="dash-expiry" class="text-white font-medium">-</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. MY PLAN TAB -->
+                <section id="tab-plan" class="tab-content space-y-6">
+                    <h2 class="text-xl font-bold text-white">Membership Plan Details</h2>
+                    <div class="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-4">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-800">
+                            <div>
+                                <p id="plan-name" class="text-lg font-bold text-white">-</p>
